@@ -127,7 +127,7 @@ Using basic setup, you don't need any extra code change and you will use the pro
 
 3. Running Ice
 
-  After the processor and reader setup, you can choose to run the processor and reader on the same or different instances. Running on different instances is recommended. For the first time, you should FIRST RUN PROCESSOR. Make sure you see non-empty output files in your working s3 bucket. Then run reader and browse to http://localhost:8080/ice/dashboard/summary.
+  After the processor and reader setup, you can choose to run the processor and reader on the same or different instances. Running on different instances is recommended. For the first time, you should FIRST RUN PROCESSOR. Make sure you see non-empty output files in your working s3 bucket. Then run reader and browse to http://localhost/ice/dashboard/summary.
   
   Here are the steps of getting ice running locally:
 
