@@ -146,6 +146,9 @@ public class ReservationCapacityPoller extends Poller {
                         DescribeReservedInstancesResult result = ec2Client.describeReservedInstances();
                         for (ReservedInstances reservation: result.getReservedInstances()) {
                             String key = account.id + "," + region.name + "," + reservation.getReservedInstancesId();
+                            if (reservation.getAvailabilityZone() == null) {
+                                reservation.setAvailabilityZone("us-east-1region");
+                            }
                             reservations.put(key, reservation);
                             if (reservation.getEnd() == null)
                                 reservation.setEnd(new Date(reservation.getStart().getTime() + reservation.getDuration() * 1000L));
