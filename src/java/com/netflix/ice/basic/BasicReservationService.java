@@ -325,6 +325,8 @@ public class BasicReservationService extends Poller implements ReservationServic
             ReservationUtilization utilization) {
         Ec2InstanceReservationPrice ec2Price =
             ec2InstanceReservationPrices.get(utilization).get(new Ec2InstanceReservationPrice.Key(region, usageType));
+        // ec2Price found to be null in a lot of cases. This is probably not correct, but it got me a little further.
+        if (ec2Price == null) return 0.0;
 
         double tier = getEc2Tier(time);
         return ec2Price.hourlyPrice.getPrice(null).getPrice(tier) +
