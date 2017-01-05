@@ -297,7 +297,7 @@ div.filter input                { border: 1px solid #CCC; background-color: #EEF
 .tagKey           { color: #999; }
 #instanceTable td { height: 27px; vertical-align: middle; }
 label.choice      { padding-right: 15px; }
-a.nactest { padding: 4px 5px 5px 5px; background-color: black;   color: white !important; text-shadow: 2px 2px 1px #E9231B; display: block; width: 133px; border-radius: 6px; -moz-border-radius: 6px; -webkit-border-radius: 6px; border: 1px solid #666; }
+a.nactest { padding: 4px 5px 5px 5px; background-color: black;   color: white !important; text-shadow: 2px 2px 1px #8B009A; display: block; width: 133px; border-radius: 6px; -moz-border-radius: 6px; -webkit-border-radius: 6px; border: 1px solid #666; }
 a.nacprod { padding: 4px 5px 5px 5px; background-color: #E9231B; color: white !important; text-shadow: 2px 2px 1px black;   display: block; width: 133px; border-radius: 6px; -moz-border-radius: 6px; -webkit-border-radius: 6px; border: 1px solid #666; }
 
 /* GROUP REPLACING PUSH */
