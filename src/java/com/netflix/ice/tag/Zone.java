@@ -34,16 +34,6 @@ public class Zone extends Tag {
         region.addZone(this);
     }
 
-    public static final Zone US_EAST_1_REGION = new Zone(Region.US_EAST_1, "us-east-1region");
-    public static final Zone US_WEST_1_REGION = new Zone(Region.US_WEST_1, "us-west-1region");
-    public static final Zone US_WEST_2_REGION = new Zone(Region.US_WEST_2, "us-west-2region");
-    public static final Zone EU_WEST_1_REGION = new Zone(Region.EU_WEST_1, "eu-west-1region");
-    public static final Zone EU_CENTRAL_1_REGION = new Zone(Region.EU_CENTRAL_1, "eu-central-1region");
-    public static final Zone SA_EAST_1_REGION = new Zone(Region.SA_EAST_1, "sa-east-1region");
-    public static final Zone AP_NORTHEAST_1_REGION = new Zone(Region.AP_NORTHEAST_1, "ap-northeast-1region");
-    public static final Zone AP_SOUTHEAST_1_REGION = new Zone(Region.AP_SOUTHEAST_1, "ap-southeast-1region");
-    public static final Zone AP_SOUTHEAST_2_REGION = new Zone(Region.AP_SOUTHEAST_2, "ap-southeast-2region");
-
     public static final Zone US_EAST_1A = new Zone(Region.US_EAST_1, "us-east-1a");
     public static final Zone US_EAST_1B = new Zone(Region.US_EAST_1, "us-east-1b");
     public static final Zone US_EAST_1C = new Zone(Region.US_EAST_1, "us-east-1c");
@@ -83,16 +73,6 @@ public class Zone extends Tag {
     private static ConcurrentMap<String, Zone> zonesByName = Maps.newConcurrentMap();
 
     static {
-        zonesByName.put(US_EAST_1_REGION.name, US_EAST_1_REGION);
-        zonesByName.put(US_WEST_1_REGION.name, US_WEST_1_REGION);
-        zonesByName.put(US_WEST_2_REGION.name, US_WEST_2_REGION);
-        zonesByName.put(EU_WEST_1_REGION.name, EU_WEST_1_REGION); 
-        zonesByName.put(EU_CENTRAL_1_REGION.name, EU_CENTRAL_1_REGION);
-        zonesByName.put(SA_EAST_1_REGION.name, SA_EAST_1_REGION);
-        zonesByName.put(AP_NORTHEAST_1_REGION.name, AP_NORTHEAST_1_REGION);
-        zonesByName.put(AP_SOUTHEAST_1_REGION.name, AP_SOUTHEAST_1_REGION);
-        zonesByName.put(AP_SOUTHEAST_2_REGION.name, AP_SOUTHEAST_2_REGION);
-
         zonesByName.put(US_EAST_1A.name, US_EAST_1A);
         zonesByName.put(US_EAST_1B.name, US_EAST_1B);
         zonesByName.put(US_EAST_1C.name, US_EAST_1C);

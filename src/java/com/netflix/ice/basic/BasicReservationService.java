@@ -171,18 +171,11 @@ public class BasicReservationService extends Poller implements ReservationServic
                         }
                     }
                     UsageType usageType = getUsageType(offer.getInstanceType(), offer.getProductDescription());
-                    if (offer.getAvailabilityZone() == null) {
-                        offer.setAvailabilityZone(region.name + "region");
-                    }
-                    // Unknown Zone
-                    if (Zone.getZone(offer.getAvailabilityZone()) == null) {
-                        logger.error("No Zone for " + offer.getAvailabilityZone());
-                    } else {
-                        hasNewPrice = setPrice(utilization, currentTime, Zone.getZone(offer.getAvailabilityZone()).region, usageType,
-                                offer.getFixedPrice(), hourly) || hasNewPrice;
+                    // Assume that the endpoint we talked to only gives RI info about its own region.
+                    hasNewPrice = setPrice(utilization, currentTime, region, usageType,
+                            offer.getFixedPrice(), hourly) || hasNewPrice;
 
-                        logger.info("Setting RI price for " + Zone.getZone(offer.getAvailabilityZone()).region + " " + utilization + " " + usageType + " " + offer.getFixedPrice() + " " + hourly);
-                    }
+                    logger.info("Setting RI price for " + region + " " + utilization + " " + usageType + " " + offer.getFixedPrice() + " " + hourly);
                 }
             } while (!StringUtils.isEmpty(token));
         }
@@ -325,8 +318,6 @@ public class BasicReservationService extends Poller implements ReservationServic
             ReservationUtilization utilization) {
         Ec2InstanceReservationPrice ec2Price =
             ec2InstanceReservationPrices.get(utilization).get(new Ec2InstanceReservationPrice.Key(region, usageType));
-        // ec2Price found to be null in a lot of cases. This is probably not correct, but it got me a little further.
-        if (ec2Price == null) return 0.0;
 
         double tier = getEc2Tier(time);
         return ec2Price.hourlyPrice.getPrice(null).getPrice(tier) +
