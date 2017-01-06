@@ -411,7 +411,7 @@ public class BasicReservationService extends Poller implements ReservationServic
             String accountId = key.substring(0, key.indexOf(","));
             Account account = config.accountService.getAccountById(accountId);
 
-            Zone zone = reservedInstances.getScope() == "Availability Zone" ? reservedInstances.getAvailabilityZone() : "";
+            Zone zone = reservedInstances.getScope() == "Availability Zone" ? Zone.getZone(reservedInstances.getAvailabilityZone()) : "";
             if (zone == null)
                 logger.error("Not able to find zone for reserved instances " + reservedInstances.getAvailabilityZone());
 
