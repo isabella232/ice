@@ -413,10 +413,9 @@ public class BasicReservationService extends Poller implements ReservationServic
             String accountId = key.substring(0, key.indexOf(","));
             Account account = config.accountService.getAccountById(accountId);
 
-            // Put null as part of the TagGroup
-            Zone zone = reservedInstances.getScope().equals("Availability Zone") ? Zone.getZone(reservedInstances.getAvailabilityZone()) : null;
-            String[] keyParts = key.split(",");
-            Region region = Region.getRegionByName(keyParts[1]);
+            Zone zone = Zone.getZone(reservedInstances.getAvailabilityZone());
+            if (zone == null)
+                logger.error("Not able to find zone for reserved instances " + reservedInstances.getAvailabilityZone());
 
             ReservationUtilization utilization = ReservationUtilization.get(reservedInstances.getOfferingType());
             long endTime = Math.min(reservedInstances.getEnd().getTime(), reservedInstances.getStart().getTime() + reservedInstances.getDuration() * 1000);
@@ -429,7 +428,7 @@ public class BasicReservationService extends Poller implements ReservationServic
 
             UsageType usageType = UsageType.getUsageType(reservedInstances.getInstanceType() + os.usageType, "hours");
 
-            TagGroup reservationKey = new TagGroup(account, region, zone, Product.ec2_instance, Operation.getReservedInstances(utilization), usageType, null);
+            TagGroup reservationKey = new TagGroup(account, zone.region, zone, Product.ec2_instance, Operation.getReservedInstances(utilization), usageType, null);
 
             List<Reservation> reservations = reservationMap.get(utilization).get(reservationKey);
             if (reservations == null) {
