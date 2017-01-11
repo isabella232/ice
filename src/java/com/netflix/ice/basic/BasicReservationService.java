@@ -340,8 +340,16 @@ public class BasicReservationService extends Poller implements ReservationServic
         double houlyCost = 0;
 
         int count = 0;
+
+        TagGroup nullZoneTagGroup = TagGroup.getTagGroup(tagGroup.account, tagGroup.region, null, tagGroup.product, tagGroup.operation, tagGroup.usageType, tagGroup.resourceGroup);
+        List<Reservation> tagGroupReservations = null;
         if (this.reservations.get(utilization).containsKey(tagGroup)) {
-            for (Reservation reservation : this.reservations.get(utilization).get(tagGroup)) {
+            tagGroupReservations = this.reservations.get(utilization).get(tagGroup); 
+        } else { 
+            tagGroupReservations = this.reservations.get(utilization).get(nullZoneTagGroup); 
+        }
+        if (tagGroupReservations != null) {
+            for (Reservation reservation : tagGroupReservations) {
                 if (time >= reservation.start && time < reservation.end) {
                     count += reservation.count;
                     Ec2InstanceReservationPrice.Key key = new Ec2InstanceReservationPrice.Key(tagGroup.region, tagGroup.usageType);
